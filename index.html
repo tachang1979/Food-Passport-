@@ -38,7 +38,6 @@
     text-transform:uppercase;
   }
 
-  /* ---------- HEADER / NAV ---------- */
   header{
     position:sticky; top:0; z-index:50;
     display:flex; justify-content:space-between; align-items:center;
@@ -72,7 +71,6 @@
     nav a:nth-child(n+3){ display:none; }
   }
 
-  /* ---------- HERO ---------- */
   .hero{
     position:relative;
     padding:14vh 6vw 10vh;
@@ -118,7 +116,6 @@
     margin-top:56px;
     flex-wrap:wrap;
   }
-  .hero-stats div{ }
   .hero-stats .num{
     font-family:'Bricolage Grotesque', sans-serif;
     font-weight:800;
@@ -133,7 +130,6 @@
     opacity:0.7;
   }
 
-  /* passport stamp decoration in hero */
   .hero-stamp{
     position:absolute;
     top:8vh; right:4vw;
@@ -163,7 +159,6 @@
   }
   @media (max-width:800px){ .hero-stamp{ display:none; } }
 
-  /* dotted flight path divider */
   .flightpath{
     max-width:1100px;
     margin:0 auto;
@@ -171,7 +166,6 @@
   }
   .flightpath svg{ width:100%; height:36px; display:block; }
 
-  /* ---------- SECTION HEADERS ---------- */
   .section-head{
     max-width:1100px;
     margin:0 auto;
@@ -198,7 +192,6 @@
     margin:0;
   }
 
-  /* ---------- ENTRY GRID ---------- */
   .entries{
     max-width:1100px;
     margin:0 auto;
@@ -268,7 +261,6 @@
     flex:1;
   }
 
-  /* the signature stamp badge on each card */
   .visa-stamp{
     position:absolute;
     top:-14px; right:-14px;
@@ -292,7 +284,6 @@
     line-height:1.15;
   }
 
-  /* ---------- ABOUT / PASSPORT PAGE ---------- */
   .passport-page{
     max-width:1100px;
     margin:6vh auto 10vh;
@@ -347,7 +338,6 @@
   }
   .taste-map li span:last-child{ color:var(--brass); }
 
-  /* ---------- FOOTER ---------- */
   footer{
     padding:6vh 6vw 5vh;
     max-width:1100px;
@@ -361,7 +351,6 @@
   }
   footer .mono{ font-size:0.68rem; opacity:0.6; }
 
-  /* reveal on scroll */
   .reveal{ opacity:0; transform:translateY(18px); transition:opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible{ opacity:1; transform:translateY(0); }
 
@@ -395,8 +384,8 @@
   <h1>What I ate, <em>and where</em></h1>
   <p class="lede">Notes from tables, street stalls, and roadside stops around the world — the dishes worth remembering, and the stories that came with them.</p>
   <div class="hero-stats">
-    <div><div class="num">14</div><div class="label">Countries eaten in</div></div>
-    <div><div class="num">62</div><div class="label">Dishes logged</div></div>
+    <div><div class="num">1</div><div class="label">Countries eaten in</div></div>
+    <div><div class="num">1</div><div class="label">Dishes logged</div></div>
     <div><div class="num">2026</div><div class="label">Currently tasting</div></div>
   </div>
 </section>
@@ -409,87 +398,21 @@
 
 <div class="section-head reveal" id="entries">
   <h2>Recent entries</h2>
-  <p>Swap these placeholders for your own dishes, photos, and notes</p>
+  <p>A running log of what I've eaten around the world</p>
 </div>
 
 <div class="entries">
 
   <article class="entry reveal">
-    <div class="visa-stamp"><span>JPN<br>2026</span></div>
-    <div class="photo" data-emoji="🍜"></div>
-    <div class="body">
-      <div class="date">Osaka, Japan — March 2026</div>
-      <h3>Tonkotsu ramen at a 12-seat counter</h3>
-      <div class="place">Dotonbori backstreet</div>
-      <p class="note">Broth simmered for two days, noodles ordered "kata" (firm). Ate it standing at a counter that only sat twelve people, queue out the door by 7pm.</p>
+    <div class="visa-stamp"><span>TWN<br>2025</span></div>
+    <div class="photo" style="background:none;">
+      <img src="IMG_9748.jpeg" alt="Ichiran tonkotsu ramen" style="width:100%;height:100%;object-fit:cover;">
     </div>
-  </article>
-  <article class="entry reveal">
-  <div class="visa-stamp"><span>TWN<br>2025</span></div>
-  <div class="photo" style="background:none;">
-    <img src="IMG_9748.jpeg" alt="Ichiran tonkotsu ramen" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="body">
-    <div class="date">Taipei, Taiwan — December 2025</div>
-    <h3>Ichiran's solo-booth tonkotsu ramen</h3>
-    <div class="place">Ichiran Ramen (一蘭拉麵)</div>
-    <p class="note">Rich, creamy tonkotsu broth with a velvety mouthfeel. The thin noodles stayed firm through the whole bowl, and the chashu practically melted. What stood out most was the fresh scallion — its sharp, clean aroma cut through the richness with every bite, balanced against the secret red chili sauce.</p>
-  </div>
-</article>
-
-
-  <article class="entry reveal">
-    <div class="visa-stamp"><span>THA<br>2025</span></div>
-    <div class="photo" data-emoji="🌶️"></div>
     <div class="body">
-      <div class="date">Chiang Mai, Thailand — November 2025</div>
-      <h3>Khao soi from a family stall</h3>
-      <div class="place">Wararot Market</div>
-      <p class="note">Crispy noodles on top, soft ones underneath, a curry broth that took three days to build heat tolerance for. Worth every bit of sweat.</p>
-    </div>
-  </article>
-
-  <article class="entry reveal">
-    <div class="visa-stamp"><span>ITA<br>2025</span></div>
-    <div class="photo" data-emoji="🍝"></div>
-    <div class="body">
-      <div class="date">Bologna, Italy — September 2025</div>
-      <h3>Tagliatelle al ragù, the real one</h3>
-      <div class="place">A trattoria with no sign out front</div>
-      <p class="note">No cream, no garlic, just meat, wine, and time. Finally understood why Bolognese abroad rarely tastes like this.</p>
-    </div>
-  </article>
-
-  <article class="entry reveal">
-    <div class="visa-stamp"><span>MEX<br>2025</span></div>
-    <div class="photo" data-emoji="🌮"></div>
-    <div class="body">
-      <div class="date">Mexico City — July 2025</div>
-      <h3>Tacos al pastor off a spinning trompo</h3>
-      <div class="place">La Condesa, after midnight</div>
-      <p class="note">Pineapple shaved straight onto the meat as it came off the spit. Ate five and regretted none of them.</p>
-    </div>
-  </article>
-
-  <article class="entry reveal">
-    <div class="visa-stamp"><span>VNM<br>2024</span></div>
-    <div class="photo" data-emoji="🥖"></div>
-    <div class="body">
-      <div class="date">Hoi An, Vietnam — December 2024</div>
-      <h3>Bánh mì from the same cart since 1990</h3>
-      <div class="place">Old Town corner stall</div>
-      <p class="note">Pâté, pickled daikon, coriander, a chilli that snuck up two bites in. The baguette shattered exactly the way it should.</p>
-    </div>
-  </article>
-
-  <article class="entry reveal">
-    <div class="visa-stamp"><span>GRC<br>2024</span></div>
-    <div class="photo" data-emoji="🐟"></div>
-    <div class="body">
-      <div class="date">Naxos, Greece — August 2024</div>
-      <h3>Grilled octopus, straight off the line</h3>
-      <div class="place">A taverna on the harbour</div>
-      <p class="note">Watched it get pulled from a drying line above the door before it hit the grill. Char, olive oil, lemon, nothing else needed.</p>
+      <div class="date">Taipei, Taiwan — December 2025</div>
+      <h3>Ichiran's solo-booth tonkotsu ramen</h3>
+      <div class="place">Ichiran Ramen (一蘭拉麵)</div>
+      <p class="note">Rich, creamy tonkotsu broth with a velvety mouthfeel. The thin noodles stayed firm through the whole bowl, and the chashu practically melted. What stood out most was the fresh scallion — its sharp, clean aroma cut through the richness with every bite, balanced against the secret red chili sauce.</p>
     </div>
   </article>
 
@@ -500,16 +423,14 @@
     <div>
       <div class="brass-line"></div>
       <h2>The idea behind this passport</h2>
-      <p>This is a running log of meals worth remembering — not restaurant reviews, just honest notes on what I ate, where, and why it stuck with me. Started as a way to keep track of dishes I wanted to recreate at home; turned into something worth sharing.</p>
-      <p style="margin-top:16px;">New entries get added as I travel. Everything here is written after the fact, from memory and a phone full of photos — so expect a bit of bias toward the meals that were actually good.</p>
+      <p>This is a running log of meals worth remembering — not restaurant reviews, just honest notes on what I ate, where, and why it stuck with me.</p>
+      <p style="margin-top:16px;">New entries get added as I travel.</p>
     </div>
     <div class="taste-map">
       <div>currently craving</div>
       <ul>
         <li><span>Next stop</span><span>Undecided</span></li>
-        <li><span>Favourite so far</span><span>Khao soi</span></li>
-        <li><span>Most missed</span><span>Bánh mì</span></li>
-        <li><span>Trying to recreate</span><span>Tonkotsu broth</span></li>
+        <li><span>Favourite so far</span><span>Tonkotsu ramen</span></li>
       </ul>
     </div>
   </div>
