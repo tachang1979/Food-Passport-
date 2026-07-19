@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Notes — A Hungry Passport</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2A41;
+    --paper:#EDE6D6;
+    --paper-dark:#E2D9C4;
+    --brass:#B8934C;
+    --stamp:#A13D2B;
+    --ink:#2B2620;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Newsreader', serif;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(184,147,76,0.06), transparent 40%),
+      radial-gradient(circle at 80% 60%, rgba(27,42,65,0.05), transparent 45%);
+  }
+
+  ::selection{ background:var(--brass); color:var(--paper); }
+
+  a{ color:inherit; }
+
+  .mono{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+
+  /* ---------- HEADER / NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 6vw;
+    background:rgba(237,230,214,0.9);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(43,38,32,0.15);
+  }
+  .brand{
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:800;
+    font-size:1.1rem;
+    letter-spacing:0.02em;
+  }
+  .brand span{ color:var(--stamp); }
+  nav a{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    text-decoration:none;
+    margin-left:28px;
+    opacity:0.75;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:opacity 0.2s, border-color 0.2s;
+  }
+  nav a:hover{ opacity:1; border-color:var(--stamp); }
+  nav{ display:flex; }
+  @media (max-width:640px){
+    nav a:nth-child(n+3){ display:none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:14vh 6vw 10vh;
+    max-width:1100px;
+    margin:0 auto;
+    overflow:hidden;
+  }
+  .hero .eyebrow{
+    font-size:0.72rem;
+    color:var(--stamp);
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero .eyebrow::before{
+    content:"";
+    width:26px; height:1px;
+    background:var(--stamp);
+    display:inline-block;
+  }
+  .hero h1{
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:800;
+    font-size:clamp(2.6rem, 7vw, 5.4rem);
+    line-height:0.98;
+    margin:0 0 28px;
+    max-width:11ch;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    color:var(--navy);
+  }
+  .hero p.lede{
+    font-size:1.15rem;
+    max-width:46ch;
+    line-height:1.6;
+    color:rgba(43,38,32,0.85);
+  }
+  .hero-stats{
+    display:flex;
+    gap:44px;
+    margin-top:56px;
+    flex-wrap:wrap;
+  }
+  .hero-stats div{ }
+  .hero-stats .num{
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:800;
+    font-size:2.1rem;
+    color:var(--navy);
+  }
+  .hero-stats .label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    opacity:0.7;
+  }
+
+  /* passport stamp decoration in hero */
+  .hero-stamp{
+    position:absolute;
+    top:8vh; right:4vw;
+    width:170px; height:170px;
+    border-radius:50%;
+    border:2.5px solid var(--stamp);
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(14deg);
+    opacity:0.85;
+    mix-blend-mode:multiply;
+  }
+  .hero-stamp::before{
+    content:"";
+    position:absolute;
+    inset:8px;
+    border:1px solid var(--stamp);
+    border-radius:50%;
+  }
+  .hero-stamp .stamp-text{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.62rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--stamp);
+    text-align:center;
+    line-height:1.5;
+  }
+  @media (max-width:800px){ .hero-stamp{ display:none; } }
+
+  /* dotted flight path divider */
+  .flightpath{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 6vw;
+  }
+  .flightpath svg{ width:100%; height:36px; display:block; }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{
+    max-width:1100px;
+    margin:0 auto;
+    padding:9vh 6vw 3vh;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:800;
+    font-size:clamp(1.8rem,4vw,2.6rem);
+    margin:0;
+  }
+  .section-head p{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    opacity:0.65;
+    max-width:32ch;
+    margin:0;
+  }
+
+  /* ---------- ENTRY GRID ---------- */
+  .entries{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 6vw 8vh;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+  @media (max-width:900px){ .entries{ grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .entries{ grid-template-columns:1fr; } }
+
+  .entry{
+    background:var(--paper-dark);
+    border:1px solid rgba(43,38,32,0.14);
+    padding:0;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .entry:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 30px rgba(27,42,65,0.14);
+  }
+  .entry .photo{
+    height:190px;
+    background:linear-gradient(135deg, var(--navy), #33506f);
+    position:relative;
+    overflow:hidden;
+  }
+  .entry .photo::after{
+    content:attr(data-emoji);
+    position:absolute;
+    inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:3.2rem;
+    filter:grayscale(0.1);
+  }
+  .entry .body{ padding:22px 22px 24px; flex:1; display:flex; flex-direction:column; }
+  .entry .date{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.65rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--stamp);
+    margin-bottom:10px;
+  }
+  .entry h3{
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:700;
+    font-size:1.3rem;
+    margin:0 0 4px;
+  }
+  .entry .place{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    opacity:0.6;
+    margin-bottom:14px;
+  }
+  .entry p.note{
+    font-size:0.98rem;
+    line-height:1.55;
+    color:rgba(43,38,32,0.85);
+    margin:0;
+    flex:1;
+  }
+
+  /* the signature stamp badge on each card */
+  .visa-stamp{
+    position:absolute;
+    top:-14px; right:-14px;
+    width:64px; height:64px;
+    border-radius:50%;
+    border:2px solid var(--stamp);
+    background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(-10deg);
+    box-shadow:0 3px 8px rgba(0,0,0,0.15);
+    mix-blend-mode:multiply;
+  }
+  .visa-stamp span{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.55rem;
+    font-weight:700;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    color:var(--stamp);
+    text-align:center;
+    line-height:1.15;
+  }
+
+  /* ---------- ABOUT / PASSPORT PAGE ---------- */
+  .passport-page{
+    max-width:1100px;
+    margin:6vh auto 10vh;
+    padding:0 6vw;
+  }
+  .passport-inner{
+    background:var(--navy);
+    color:var(--paper);
+    border-radius:4px;
+    padding:6vh 6vw;
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:48px;
+    position:relative;
+    overflow:hidden;
+  }
+  .passport-inner::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:repeating-linear-gradient(45deg, rgba(184,147,76,0.045) 0, rgba(184,147,76,0.045) 1px, transparent 1px, transparent 14px);
+    pointer-events:none;
+  }
+  @media (max-width:800px){ .passport-inner{ grid-template-columns:1fr; } }
+
+  .passport-inner h2{
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:800;
+    font-size:clamp(1.7rem,3.4vw,2.3rem);
+    margin:0 0 20px;
+  }
+  .passport-inner p{
+    line-height:1.65;
+    font-size:1.02rem;
+    color:rgba(237,230,214,0.85);
+  }
+  .passport-inner .brass-line{
+    width:44px; height:2px; background:var(--brass); margin-bottom:22px;
+  }
+
+  .taste-map{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+  .taste-map ul{ list-style:none; padding:0; margin:18px 0 0; }
+  .taste-map li{
+    display:flex; justify-content:space-between;
+    padding:11px 0;
+    border-bottom:1px dotted rgba(237,230,214,0.25);
+  }
+  .taste-map li span:last-child{ color:var(--brass); }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:6vh 6vw 5vh;
+    max-width:1100px;
+    margin:0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    border-top:1px solid rgba(43,38,32,0.15);
+  }
+  footer .mono{ font-size:0.68rem; opacity:0.6; }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .entry:hover{ transform:none; }
+  }
+
+  :focus-visible{
+    outline:2px solid var(--stamp);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">field notes <span>&</span> full stomachs</div>
+  <nav>
+    <a href="#entries">Entries</a>
+    <a href="#about">About</a>
+    <a href="#footer">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-stamp">
+    <div class="stamp-text">edible<br>entry<br>visa</div>
+  </div>
+  <p class="eyebrow">a running food diary, stamped by country</p>
+  <h1>What I ate, <em>and where</em></h1>
+  <p class="lede">Notes from tables, street stalls, and roadside stops around the world — the dishes worth remembering, and the stories that came with them.</p>
+  <div class="hero-stats">
+    <div><div class="num">14</div><div class="label">Countries eaten in</div></div>
+    <div><div class="num">62</div><div class="label">Dishes logged</div></div>
+    <div><div class="num">2026</div><div class="label">Currently tasting</div></div>
+  </div>
+</section>
+
+<div class="flightpath">
+  <svg viewBox="0 0 1000 36" preserveAspectRatio="none">
+    <line x1="0" y1="18" x2="1000" y2="18" stroke="#B8934C" stroke-width="1.5" stroke-dasharray="2 10" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<div class="section-head reveal" id="entries">
+  <h2>Recent entries</h2>
+  <p>Swap these placeholders for your own dishes, photos, and notes</p>
+</div>
+
+<div class="entries">
+
+  <article class="entry reveal">
+    <div class="visa-stamp"><span>JPN<br>2026</span></div>
+    <div class="photo" data-emoji="🍜"></div>
+    <div class="body">
+      <div class="date">Osaka, Japan — March 2026</div>
+      <h3>Tonkotsu ramen at a 12-seat counter</h3>
+      <div class="place">Dotonbori backstreet</div>
+      <p class="note">Broth simmered for two days, noodles ordered "kata" (firm). Ate it standing at a counter that only sat twelve people, queue out the door by 7pm.</p>
+    </div>
+  </article>
+
+  <article class="entry reveal">
+    <div class="visa-stamp"><span>THA<br>2025</span></div>
+    <div class="photo" data-emoji="🌶️"></div>
+    <div class="body">
+      <div class="date">Chiang Mai, Thailand — November 2025</div>
+      <h3>Khao soi from a family stall</h3>
+      <div class="place">Wararot Market</div>
+      <p class="note">Crispy noodles on top, soft ones underneath, a curry broth that took three days to build heat tolerance for. Worth every bit of sweat.</p>
+    </div>
+  </article>
+
+  <article class="entry reveal">
+    <div class="visa-stamp"><span>ITA<br>2025</span></div>
+    <div class="photo" data-emoji="🍝"></div>
+    <div class="body">
+      <div class="date">Bologna, Italy — September 2025</div>
+      <h3>Tagliatelle al ragù, the real one</h3>
+      <div class="place">A trattoria with no sign out front</div>
+      <p class="note">No cream, no garlic, just meat, wine, and time. Finally understood why Bolognese abroad rarely tastes like this.</p>
+    </div>
+  </article>
+
+  <article class="entry reveal">
+    <div class="visa-stamp"><span>MEX<br>2025</span></div>
+    <div class="photo" data-emoji="🌮"></div>
+    <div class="body">
+      <div class="date">Mexico City — July 2025</div>
+      <h3>Tacos al pastor off a spinning trompo</h3>
+      <div class="place">La Condesa, after midnight</div>
+      <p class="note">Pineapple shaved straight onto the meat as it came off the spit. Ate five and regretted none of them.</p>
+    </div>
+  </article>
+
+  <article class="entry reveal">
+    <div class="visa-stamp"><span>VNM<br>2024</span></div>
+    <div class="photo" data-emoji="🥖"></div>
+    <div class="body">
+      <div class="date">Hoi An, Vietnam — December 2024</div>
+      <h3>Bánh mì from the same cart since 1990</h3>
+      <div class="place">Old Town corner stall</div>
+      <p class="note">Pâté, pickled daikon, coriander, a chilli that snuck up two bites in. The baguette shattered exactly the way it should.</p>
+    </div>
+  </article>
+
+  <article class="entry reveal">
+    <div class="visa-stamp"><span>GRC<br>2024</span></div>
+    <div class="photo" data-emoji="🐟"></div>
+    <div class="body">
+      <div class="date">Naxos, Greece — August 2024</div>
+      <h3>Grilled octopus, straight off the line</h3>
+      <div class="place">A taverna on the harbour</div>
+      <p class="note">Watched it get pulled from a drying line above the door before it hit the grill. Char, olive oil, lemon, nothing else needed.</p>
+    </div>
+  </article>
+
+</div>
+
+<div class="passport-page reveal" id="about">
+  <div class="passport-inner">
+    <div>
+      <div class="brass-line"></div>
+      <h2>The idea behind this passport</h2>
+      <p>This is a running log of meals worth remembering — not restaurant reviews, just honest notes on what I ate, where, and why it stuck with me. Started as a way to keep track of dishes I wanted to recreate at home; turned into something worth sharing.</p>
+      <p style="margin-top:16px;">New entries get added as I travel. Everything here is written after the fact, from memory and a phone full of photos — so expect a bit of bias toward the meals that were actually good.</p>
+    </div>
+    <div class="taste-map">
+      <div>currently craving</div>
+      <ul>
+        <li><span>Next stop</span><span>Undecided</span></li>
+        <li><span>Favourite so far</span><span>Khao soi</span></li>
+        <li><span>Most missed</span><span>Bánh mì</span></li>
+        <li><span>Trying to recreate</span><span>Tonkotsu broth</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer id="footer">
+  <div class="mono">field notes &amp; full stomachs — a personal food log</div>
+  <div class="mono">updated as I travel</div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
