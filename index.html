@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Field Notes — A Hungry Passport</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --navy:#1B2A41;
@@ -22,7 +22,7 @@
     margin:0;
     background:var(--paper);
     color:var(--ink);
-    font-family:'Newsreader', serif;
+    font-family:'Newsreader', 'Noto Sans TC', 'Noto Sans JP', serif;
     background-image:
       radial-gradient(circle at 20% 10%, rgba(184,147,76,0.06), transparent 40%),
       radial-gradient(circle at 80% 60%, rgba(27,42,65,0.05), transparent 45%);
@@ -253,12 +253,29 @@
     opacity:0.6;
     margin-bottom:14px;
   }
-  .entry p.note{
+  .entry p.note-zh{
+    font-family:'Noto Sans TC', sans-serif;
     font-size:0.98rem;
-    line-height:1.55;
+    line-height:1.7;
     color:rgba(43,38,32,0.85);
     margin:0;
-    flex:1;
+  }
+  .entry p.note{
+    font-size:0.92rem;
+    line-height:1.6;
+    color:rgba(43,38,32,0.75);
+    margin:10px 0 0;
+    padding-top:10px;
+    border-top:1px dotted rgba(43,38,32,0.2);
+  }
+  .entry p.note-ja{
+    font-family:'Noto Sans JP', sans-serif;
+    font-size:0.9rem;
+    line-height:1.7;
+    color:rgba(43,38,32,0.65);
+    margin:10px 0 0;
+    padding-top:10px;
+    border-top:1px dotted rgba(43,38,32,0.2);
   }
 
   .visa-stamp{
@@ -412,7 +429,9 @@
       <div class="date">Taipei, Taiwan — December 2025</div>
       <h3>Ichiran's solo-booth tonkotsu ramen</h3>
       <div class="place">Ichiran Ramen (一蘭拉麵)</div>
+      <p class="note-zh">豚骨湯頭濃郁綿密，帶點奶油般的滑順口感；麵條偏細、久煮不軟爛，保留了紮實的咬勁。叉燒薄切入口即化，配上蔥花的清爽辛香和一點紅色秘傳醬料的辣度，讓整碗湯層次更豐富——蔥香在每一口麵之間都很明顯，是解膩的關鍵。</p>
       <p class="note">Rich, creamy tonkotsu broth with a velvety mouthfeel. The thin noodles stayed firm through the whole bowl, and the chashu practically melted. What stood out most was the fresh scallion — its sharp, clean aroma cut through the richness with every bite, balanced against the secret red chili sauce.</p>
+      <p class="note-ja">濃厚でクリーミーな豚骨スープ。麺は細めでコシがあり、最後まで伸びなかった。チャーシューはとろけるほど柔らかく、特に印象的だったのは新鮮なネギの香り——一口ごとにスープの濃厚さを爽やかに引き締め、秘伝の辛味ダレとの相性も抜群だった。</p>
     </div>
   </article>
 
