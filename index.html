@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+html_content = '''<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
@@ -155,6 +156,7 @@
     font-weight:800;
     font-size:2.1rem;
     color:var(--navy);
+    font-variant-numeric: tabular-nums;
   }
   .hero-stats .label{
     font-family:'JetBrains Mono', 'Noto Sans TC', 'Noto Sans JP', monospace;
@@ -173,6 +175,11 @@
     transform:rotate(14deg);
     opacity:0.85;
     mix-blend-mode:multiply;
+    animation: stampIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  @keyframes stampIn {
+    from { transform: rotate(45deg) scale(0.7); opacity: 0; }
+    to { transform: rotate(14deg) scale(1); opacity: 0.85; }
   }
   .hero-stamp::before{
     content:"";
@@ -194,6 +201,12 @@
 
   .flightpath{ max-width:1100px; margin:0 auto; padding:0 6vw; }
   .flightpath svg{ width:100%; height:36px; display:block; }
+  .flightpath line {
+    animation: fly 20s linear infinite;
+  }
+  @keyframes fly {
+    to { stroke-dashoffset: -24; }
+  }
 
   .section-head{
     max-width:1100px;
@@ -250,12 +263,27 @@
     position:relative;
     overflow:hidden;
   }
+  .entry .photo img{
+    width:100%; height:100%; object-fit:cover;
+    transition: transform 0.5s ease, opacity 0.4s ease;
+    opacity: 0;
+  }
+  .entry .photo img.loaded {
+    opacity: 1;
+  }
+  .entry .photo img.error {
+    display: none;
+  }
   .entry .photo::after{
     content:attr(data-emoji);
     position:absolute;
     inset:0;
     display:flex; align-items:center; justify-content:center;
     font-size:3.2rem;
+    z-index: 0;
+  }
+  .entry:hover .photo img.loaded {
+    transform: scale(1.05);
   }
   .entry .body{ padding:22px 22px 24px; flex:1; display:flex; flex-direction:column; }
   .entry .date{
@@ -298,6 +326,11 @@
     transform:rotate(-10deg);
     box-shadow:0 3px 8px rgba(0,0,0,0.15);
     mix-blend-mode:multiply;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 10;
+  }
+  .entry:hover .visa-stamp {
+    transform: rotate(5deg) scale(1.08);
   }
   .visa-stamp span{
     font-family:'JetBrains Mono', monospace;
@@ -373,6 +406,13 @@
     opacity:0.65;
     margin:0 0 24px;
   }
+  .giscus-loading {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    opacity: 0.5;
+    padding: 2rem 0;
+    letter-spacing: 0.05em;
+  }
 
   footer{
     padding:6vh 6vw 5vh;
@@ -394,6 +434,10 @@
   @media (prefers-reduced-motion: reduce){
     .reveal{ opacity:1; transform:none; transition:none; }
     .entry:hover{ transform:none; }
+    .hero-stamp { animation: none; opacity: 0.85; transform: rotate(14deg); }
+    .flightpath line { animation: none; }
+    .entry:hover .visa-stamp { transform: rotate(-10deg); }
+    .entry:hover .photo img.loaded { transform: none; }
   }
 
   :focus-visible{ outline:2px solid var(--stamp); outline-offset:3px; }
@@ -420,9 +464,9 @@
       </a>
     </nav>
     <div class="lang-switch">
-      <button data-set-lang="zh" class="active">中</button>
-      <button data-set-lang="en">EN</button>
-      <button data-set-lang="ja">日</button>
+      <button data-set-lang="zh" class="active" aria-label="切換至中文">中</button>
+      <button data-set-lang="en" aria-label="Switch to English">EN</button>
+      <button data-set-lang="ja" aria-label="日本語に切り替え">日</button>
     </div>
   </div>
 </header>
@@ -448,7 +492,7 @@
   </p>
   <div class="hero-stats">
     <div><div class="num">1</div><div class="label"><span class="lang-zh">造訪過的國家</span><span class="lang-en">Countries eaten in</span><span class="lang-ja">訪れた国</span></div></div>
-    <div><div class="num">3</div><div class="label"><span class="lang-zh">已紀錄的料理</span><span class="lang-en">Dishes logged</span><span class="lang-ja">記録した料理</span></div></div>
+    <div><div class="num">2</div><div class="label"><span class="lang-zh">已紀錄的料理</span><span class="lang-en">Dishes logged</span><span class="lang-ja">記録した料理</span></div></div>
     <div><div class="num">2026</div><div class="label"><span class="lang-zh">目前品嚐中</span><span class="lang-en">Currently tasting</span><span class="lang-ja">現在味わい中</span></div></div>
   </div>
 </section>
@@ -468,31 +512,8 @@
 
   <article class="entry reveal">
     <div class="visa-stamp"><span>TWN<br>2026</span></div>
-    <div class="photo" style="background:none;">
-      <img src="WhatsApp Image 2026-07-20 at 3.33.45 PM.jpeg" alt="Miaokou mini Taiwan sausage" style="width:100%;height:100%;object-fit:cover;">
-    </div>
-    <div class="body">
-      <div class="date">
-        <span class="lang-zh">士林，台灣 — 2026年1月</span>
-        <span class="lang-en">Shilin, Taiwan — January 2026</span>
-        <span class="lang-ja">士林、台湾 — 2026年1月</span>
-      </div>
-      <h3>
-        <span class="lang-zh">廟口小香腸</span>
-        <span class="lang-en">Miaokou Mini Taiwan Sausage</span>
-        <span class="lang-ja">廟口小香腸</span>
-      </h3>
-      <div class="place">士林廟口小香腸（士林夜市）</div>
-      <p class="note lang-zh">一口一顆的迷你台式香腸，現點現烤。外皮微焦帶脆，一咬下去卻爆汁，肉質扎實卻完全不油膩，鹹香拿捏得剛剛好，一顆接一顆完全停不下來，是逛士林夜市時最順手的小點心。</p>
-      <p class="note lang-en">Bite-sized Taiwanese sausages, grilled fresh to order. The skin has a light char and a satisfying snap, giving way to a juicy, savory bite that's surprisingly light — never greasy. Impossible to stop at just one, and the perfect grab-and-go snack while wandering Shilin Night Market.</p>
-      <p class="note lang-ja">一口サイズの台湾風ミニソーセージ、注文を受けてから焼き上げる。皮は香ばしくパリッとしていて、噛むとジュワッと肉汁があふれる。食感はしっかりしているのにしつこさが全くなく、ちょうどいい塩気で次々と手が伸びる。士林夜市散策中のおやつに最適。</p>
-    </div>
-  </article>
-
-  <article class="entry reveal">
-    <div class="visa-stamp"><span>TWN<br>2026</span></div>
-    <div class="photo" style="background:none;">
-      <img src="IMG_9712.jpeg" alt="Juanmao Li da chang mixian" style="width:100%;height:100%;object-fit:cover;">
+    <div class="photo" data-emoji="🍜">
+      <img src="IMG_9712.jpeg" alt="Juanmao Li da chang mixian" loading="lazy" onload="this.classList.add('loaded')" onerror="this.classList.add('error')">
     </div>
     <div class="body">
       <div class="date">
@@ -514,8 +535,8 @@
 
   <article class="entry reveal">
     <div class="visa-stamp"><span>TWN<br>2025</span></div>
-    <div class="photo" style="background:none;">
-      <img src="IMG_9748.jpeg" alt="Ichiran tonkotsu ramen" style="width:100%;height:100%;object-fit:cover;">
+    <div class="photo" data-emoji="🍜">
+      <img src="IMG_9748.jpeg" alt="Ichiran tonkotsu ramen" loading="lazy" onload="this.classList.add('loaded')" onerror="this.classList.add('error')">
     </div>
     <div class="body">
       <div class="date">
@@ -566,6 +587,7 @@
 <div class="comments-section reveal" id="comments">
   <h2><span class="lang-zh">留言</span><span class="lang-en">Comments</span><span class="lang-ja">コメント</span></h2>
   <p class="sub"><span class="lang-zh">用 GitHub 帳號留言，我會親自回覆</span><span class="lang-en">Sign in with GitHub to leave a comment — I read and reply to every one</span><span class="lang-ja">GitHubアカウントでコメントできます。すべて目を通して返信します</span></p>
+  <div class="giscus-loading" id="giscus-loading">Loading comments...</div>
   <script src="https://giscus.app/client.js"
           data-repo="tachang1979/Food-Passport-"
           data-repo-id="R_kgDOTdRuWg"
@@ -590,11 +612,12 @@
     <span class="lang-ja">食のフィールドノート & 満腹な胃 — 個人的な食の記録</span>
   </div>
   <div class="visitor-count">
-    <img src="https://visitor-badge.laobi.icu/badge?page_id=tachang1979.food-passport" alt="visitor count">
+    <img src="https://visitor-badge.laobi.icu/badge?page_id=tachang1979.food-passport" alt="visitor count" onerror="this.style.display='none'">
   </div>
 </footer>
 
 <script>
+  // Intersection Observer for reveal animations
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -606,16 +629,47 @@
   }, { threshold: 0.12 });
   revealEls.forEach(el => io.observe(el));
 
+  // Language switcher with accessibility
   const langButtons = document.querySelectorAll('.lang-switch button');
+  
+  function updateAriaHidden(lang) {
+    document.querySelectorAll('.lang-zh, .lang-en, .lang-ja').forEach(el => {
+      if (el.classList.contains('lang-' + lang)) {
+        el.removeAttribute('aria-hidden');
+      } else {
+        el.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+  
+  // Initialize aria-hidden on page load
+  updateAriaHidden('zh');
+  
   langButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const lang = btn.getAttribute('data-set-lang');
       document.body.setAttribute('data-lang', lang);
       langButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      updateAriaHidden(lang);
     });
+  });
+
+  // Hide giscus loading when comments load
+  window.addEventListener('message', function(e) {
+    if (e.origin !== 'https://giscus.app') return;
+    if (e.data && e.data.giscus) {
+      const loader = document.getElementById('giscus-loading');
+      if (loader) loader.style.display = 'none';
+    }
   });
 </script>
 
 </body>
-</html>
+</html>'''
+
+with open('/mnt/agents/output/index.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("File saved successfully!")
+print(f"File size: {len(html_content)} characters")
